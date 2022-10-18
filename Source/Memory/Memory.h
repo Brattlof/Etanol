@@ -20,8 +20,4 @@ namespace Etanol
 	}
 }
 
-
-#define delete(x) ::Etanol::SafeDelete(x)
-#define new(x) new x
-
 #endif

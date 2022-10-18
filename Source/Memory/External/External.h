@@ -4,18 +4,37 @@
 #include <Singleton/Singleton.h>
 
 #include <windows.h>
+#include <TlHelp32.h>
+#include <psapi.h>
 
 namespace Etanol
 {
 	class External : public Singleton<External>
 	{
 	public:
-		External(void) : m_Handle(NULL), m_Pid(NULL) {  };
-		~External(void) { if (m_Handle) CloseHandle(m_Handle); }
+		External(void) : ProcessBase(NULL), m_ProcessHandle(NULL), m_Process({ }) {  };
+		~External(void) { if (m_ProcessHandle) CloseHandle(m_ProcessHandle); }
+
+		template <class T>
+		T Read(const DWORD& address)
+		{
+			T Out = { };
+			ReadProcessMemory(m_ProcessHandle, (LPCVOID)address, &Out, sizeof(T), nullptr);
+			return Out;
+		}
+
+		BOOLEAN SetProcess(const char* process_exe_name);
+
+		PROCESSENTRY32 FindProcess(const char* process_exe_name);
+		MODULEENTRY32 FindModule(const char* module_name);
+
 
 	public:
-		HANDLE m_Handle;
-		DWORD m_Pid;
+		DWORD ProcessBase;
+
+	private:
+		HANDLE m_ProcessHandle;
+		PROCESSENTRY32 m_Process;
 	};
 }
 

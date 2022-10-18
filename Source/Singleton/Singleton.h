@@ -11,8 +11,8 @@ protected:
 	virtual ~Singleton(void) { s_pInstance = nullptr; }
 
 public:
-	static void Init(void) { if (s_pInstance != nullptr) return; new(T); }
-	static void Deinit(void) { if (s_pInstance == nullptr) return; delete(s_pInstance); }
+	static void Init(void) { if (s_pInstance != nullptr) return; new T; }
+	static void Deinit(void) { if (s_pInstance == nullptr) return; delete s_pInstance; }
 
 	static T& GetInstance(void) { return *s_pInstance; }
 	static T* GetInstancePtr(void) { return s_pInstance; }
