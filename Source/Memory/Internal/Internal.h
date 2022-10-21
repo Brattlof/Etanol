@@ -9,7 +9,7 @@ namespace Etanol
 	class Internal : public Singleton<Internal>
 	{
 	public:
-		Internal(void) : m_Base( (ADDY)GetModuleHandle(NULL) ) { }
+		Internal(void);
 		~Internal(void) = default;
 
 		template <class T>
