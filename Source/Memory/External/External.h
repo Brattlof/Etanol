@@ -23,6 +23,12 @@ namespace Etanol
 			return Out;
 		}
 
+		template<class T>
+		void Write(const DWORD& address, const T& buffer)
+		{
+			WriteProcessMemory(m_ProcessHandle, (LPCVOID)address, &buffer, sizeof(T), nullptr);
+		}
+
 		BOOLEAN SetProcess(const char* process_exe_name);
 
 		PROCESSENTRY32 FindProcess(const char* process_exe_name);
