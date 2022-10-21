@@ -8,33 +8,12 @@ BOOLEAN External::SetProcess(const char* process_exe_name)
 {
 	if (m_ProcessHandle) CloseHandle(m_ProcessHandle);
 	m_Process = { };
-	ProcessBase = NULL;
+	m_ProcessBase = NULL;
 
 	m_Process = FindProcess(process_exe_name);
 	if (!m_Process.th32ProcessID) return 0x0;
 
-	if (m_ProcessHandle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, m_Process.th32ProcessID))
-	{
-		HMODULE lphModule[1024];
-		DWORD lpcbNeeded(NULL);
-
-		if (!EnumProcessModules(m_ProcessHandle, lphModule, sizeof(lphModule), &lpcbNeeded))
-		{
-			return 0x0;
-		}
-
-		TCHAR szModName[MAX_PATH];
-		if (!GetModuleFileNameEx(m_ProcessHandle, lphModule[0], szModName, sizeof(szModName) / sizeof(TCHAR)))
-		{
-			return 0x0;
-		}
-
-		ProcessBase = (DWORD)lphModule[0];
-
-		return 0x1;
-	}
-
-	return 0x0;
+	return 0x1;
 }
 
 PROCESSENTRY32 External::FindProcess(const char* process_exe_name)
