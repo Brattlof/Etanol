@@ -1,6 +1,14 @@
 #ifndef __MEMORY_H__
 #define __MEMORY_H__
 
+#include <windows.h>
+
+#if _WIN64
+typedef DWORD64 ADDY;
+#else
+typedef DWORD ADDY;
+#endif
+
 namespace Etanol
 {
 	template <class T>
