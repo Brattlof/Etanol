@@ -15,13 +15,19 @@ namespace Etanol
 		template <class T>
 		T Read(const ADDY& address)
 		{
-			return *(T*)address;
+			return *reinterpret_cast<T*>(address);
+		}
+
+		template <class T>
+		T* ReadPtr(const ADDY& address)
+		{
+			return reinterpret_cast<T*>(address);
 		}
 
 		template <class T>
 		void Write(const ADDY& address, const T& buffer)
 		{
-			*(T*)address = buffer;
+			*reinterpret_cast<T*>(address) = buffer;
 		}
 
 		const ADDY GetBase(void) { return m_Base; }

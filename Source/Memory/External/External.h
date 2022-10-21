@@ -19,14 +19,14 @@ namespace Etanol
 		T Read(const ADDY& address)
 		{
 			T Out = { };
-			ReadProcessMemory(m_ProcessHandle, (LPCVOID)address, &Out, sizeof(T), nullptr);
+			ReadProcessMemory(m_ProcessHandle, reinterpret_cast<LPCVOID>(address), &Out, sizeof(T), nullptr);
 			return Out;
 		}
 
 		template<class T>
 		void Write(const ADDY& address, const T& buffer)
 		{
-			WriteProcessMemory(m_ProcessHandle, (LPCVOID)address, &buffer, sizeof(T), nullptr);
+			WriteProcessMemory(m_ProcessHandle, reinterpret_cast<LPCVOID>(address), &buffer, sizeof(T), nullptr);
 		}
 
 		BOOLEAN SetProcess(const char* process_exe_name);

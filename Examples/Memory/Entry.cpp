@@ -17,6 +17,7 @@ int main(void)
 	rInternal.Write<float>(test_addy, 420.f);
 	printf("0x%X : %f\n", test_addy, rInternal.Read<float>((ADDY)&test));
 
+
 	Etanol::Internal::Deinit();
 
 	return 0;
