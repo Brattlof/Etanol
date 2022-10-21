@@ -13,22 +13,13 @@ namespace Etanol
 		~Internal(void) = default;
 
 		template <class T>
-		T Read(const ADDY& address)
-		{
-			return *reinterpret_cast<T*>(address);
-		}
+		T Read(const ADDY& address) { return *reinterpret_cast<T*>(address); }
 
 		template <class T>
-		T* ReadPtr(const ADDY& address)
-		{
-			return reinterpret_cast<T*>(address);
-		}
+		T* ReadPtr(const ADDY& address) { return reinterpret_cast<T*>(address); }
 
 		template <class T>
-		void Write(const ADDY& address, const T& buffer)
-		{
-			*reinterpret_cast<T*>(address) = buffer;
-		}
+		void Write(const ADDY& address, const T& buffer) { *reinterpret_cast<T*>(address) = buffer; }
 
 		const ADDY GetBase(void) { return m_Base; }
 
