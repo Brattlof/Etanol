@@ -3,9 +3,9 @@
 
 #include <windows.h>
 
-#if _WIN64
+#if defined( _WIN64 )  
 typedef DWORD64 ADDY;
-#else
+#elif defined( _WIN32 )
 typedef DWORD ADDY;
 #endif
 
